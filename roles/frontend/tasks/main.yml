@@ -1,18 +1,5 @@
-#NGINX() {
-#CHECK_ROOT
-
-#PRINT "Install nginx "
-#yum install nginx -y &>>${LOG}
-#CHECK_STAT $?
-
-#PRINT "Start Nginx service"
-##systemctl start nginx &>>${LOG} && systemctl enable nginx &>>${LOG}
-#CHECK_STAT $?
 
 
-#PRINT "Download frontend content"
-#curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG}
-#CHECK_STAT $?
 
 #PRINT "remove old content"
 #cd /usr/share/nginx/html
@@ -47,15 +34,11 @@
     name: nginx
     state: installed
 
-#- name: Starting nginx service
-#  ansible.builtin.systemd:
-#    state: started
-#    name: nginx
-#
-#- name: Download frontend content
-#  ansible.builtin.get_url:
-#    url: https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip
-#    dest: /tmp/frontend.zip
+- name: Download {{ COMPONENT }} code
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+    
 #
 #- name: delete old content
 #  ansible.builtin.file:
