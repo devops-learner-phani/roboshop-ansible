@@ -3,6 +3,11 @@
     path: "{{ APP_LOCATION }}"
     state: absent
 
+- name: Create content
+  ansible.builtin.file:
+    path: "{{ APP_LOCATION }}"
+    state: directory
+
 
 - name: Download and Extract {{ COMPONENT }} component archive
   ansible.builtin.unarchive:
