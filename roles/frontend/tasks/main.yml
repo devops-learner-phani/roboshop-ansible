@@ -34,7 +34,7 @@
     name: nginx
     state: installed
 
-- name: Download {{ COMPONENT }} code
+- name: Import Common role Code download
   ansible.builtin.include_role:
     name: common
     tasks_from: download
