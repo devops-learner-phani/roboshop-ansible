@@ -4,10 +4,14 @@
     state: absent
 
 
-- name: Download and Extract frontend content
+- name: Download and Extract {{ COMPONENT }} component archive
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
     dest: /tmp
     remote_src: yes
 
-    
+- name: copy {{ COMPONENT }} code to app location
+  ansible.builtin.copy:
+    src: /tmp/{{ COMPONENT }}-main
+    dest: "{{ APP_LOCATION }}"
+    remote_src: yes

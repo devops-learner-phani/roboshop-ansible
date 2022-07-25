@@ -1,15 +1,3 @@
-
-
-
-#PRINT "remove old content"
-#cd /usr/share/nginx/html
-#rm -rf * &>>${LOG}
-#CHECK_STAT $?
-
-#PRINT "Extract ${COMPONENT} content"
-#unzip /tmp/${COMPONENT}.zip &>>${LOG}
-#CHECK_STAT $?
-
 #PRINT "Organise ${COMPONENT} content"
 #mv ${COMPONENT}-main/static/* . &>>${LOG}
 #CHECK_STAT $?
@@ -40,13 +28,6 @@
     tasks_from: download
 
 
-#
-#- name: organise frontend content
-#  ansible.builtin.copy:
-#    src: frontend-main/static/*
-#    dest: /usr/share/nginx/html
-#    owner:
-#    group:
 #
 #- name: Setup system configuration
 #  ansible.builtin.copy:
