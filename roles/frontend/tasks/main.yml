@@ -48,16 +48,18 @@
     name: nginx
     state: installed
 
-- name: Inculded {{ COMPONENT }} role
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: download
-
 - name: Start {{ COMPONENT }} service
   ansible.builtin.service:
     name: nginx
     state: started
     enable: yes
+
+- name: Inculded {{ COMPONENT }} role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+
 
 
 
