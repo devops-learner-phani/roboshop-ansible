@@ -38,11 +38,7 @@
     tasks_from: download
 
 
-- name: Start Nginx service
-  ansible.builtin.service:
-    name: nginx
-    state: started
-    enabled: yes
+
 
 
 
