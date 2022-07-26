@@ -53,6 +53,12 @@
     name: common
     tasks_from: download
 
+- name: Start {{ COMPONENT }} service
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enable: yes
+
 
 
 
