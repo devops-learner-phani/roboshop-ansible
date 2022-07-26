@@ -3,11 +3,6 @@
 #    systemctl start nginx &>>${LOG} && systemctl enable nginx &>>${LOG}
 #    CHECK_STAT $?
 #
-#
-#    PRINT "Download frontend content"
-#    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG}
-#    CHECK_STAT $?
-#
 #    PRINT "remove old content"
 #    cd /usr/share/nginx/html
 #    rm -rf * &>>${LOG}
@@ -17,13 +12,6 @@
 #    unzip /tmp/${COMPONENT}.zip &>>${LOG}
 #    CHECK_STAT $?
 
-
-
-
-
-
-
-#
 #PRINT "Organise ${COMPONENT} content"
 #mv ${COMPONENT}-main/static/* . &>>${LOG}
 #CHECK_STAT $?
@@ -47,12 +35,6 @@
   ansible.builtin.yum:
     name: nginx
     state: installed
-
-- name: Start {{ COMPONENT }} service
-  ansible.builtin.service:
-    name: nginx
-    state: started
-    enable: yes
 
 - name: Inculded {{ COMPONENT }} role
   ansible.builtin.include_role:
