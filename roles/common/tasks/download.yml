@@ -1,7 +1,12 @@
-- name: Remove old {{ COMPONENT }} content
+- name: remove app location
   ansible.builtin.file:
     path: "{{ APP_LOCATION }}"
     state: absent
+
+- name: Create app location
+  ansible.builtin.file:
+    path: "{{ APP_LOCATION }}"
+    state: directory
 
 - name: Download and Extract {{ COMPONENT }} content
   ansible.builtin.unarchive:
