@@ -32,6 +32,12 @@
     name: nginx
     state: installed
 
+- name: Download {{ COMPONENT }} code
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+
 - name: Start Nginx service
   ansible.builtin.service:
     name: nginx
