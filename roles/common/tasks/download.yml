@@ -19,4 +19,5 @@
     src: /tmp/{{ COMPONENT }}-main/{{SUFFIX}}
     dest: "{{ APP_LOCATION }}"
     remote_src: yes
+    
 
