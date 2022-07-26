@@ -3,10 +3,6 @@
 #    systemctl start nginx &>>${LOG} && systemctl enable nginx &>>${LOG}
 #    CHECK_STAT $?
 
-#    PRINT "Extract ${COMPONENT} content"
-#    unzip /tmp/${COMPONENT}.zip &>>${LOG}
-#    CHECK_STAT $?
-
 #PRINT "Organise ${COMPONENT} content"
 #mv ${COMPONENT}-main/static/* . &>>${LOG}
 #CHECK_STAT $?
