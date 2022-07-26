@@ -1,7 +1,4 @@
 
-#  PRINT "Start Nginx service"
-#    systemctl start nginx &>>${LOG} && systemctl enable nginx &>>${LOG}
-#    CHECK_STAT $?
 
 
 #PRINT "Setup system configuration"
@@ -29,10 +26,15 @@
     name: common
     tasks_from: download
 
+- name: Copy roboshop configuration file
+  ansible.builtin.template:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
 - name: restart Nginx service
   ansible.builtin.systemd:
     name: nginx
-    state: started
+    state: restarted
     enabled: yes
 
 
