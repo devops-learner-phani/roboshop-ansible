@@ -4,8 +4,5 @@
     dest: /tmp/{{ COMPONENT }}.zip
 
 
-- name: Remove old file
-  ansible.builtin.file:
-    path: "{{ APP_LOCATION }}"
-    state: absent
+
 
