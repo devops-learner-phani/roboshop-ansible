@@ -3,10 +3,7 @@
 #    systemctl start nginx &>>${LOG} && systemctl enable nginx &>>${LOG}
 #    CHECK_STAT $?
 
-#PRINT "Organise ${COMPONENT} content"
-#mv ${COMPONENT}-main/static/* . &>>${LOG}
-#CHECK_STAT $?
-#
+
 #PRINT "Setup system configuration"
 #mv ${COMPONENT}-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
 #CHECK_STAT $?
@@ -31,6 +28,15 @@
   ansible.builtin.include_role:
     name: common
     tasks_from: download
+
+- name: restart Nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
+    enabled: yes
+
+
+
 
 
 
