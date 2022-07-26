@@ -2,11 +2,6 @@
 #  PRINT "Start Nginx service"
 #    systemctl start nginx &>>${LOG} && systemctl enable nginx &>>${LOG}
 #    CHECK_STAT $?
-#
-#    PRINT "remove old content"
-#    cd /usr/share/nginx/html
-#    rm -rf * &>>${LOG}
-#    CHECK_STAT $?
 
 #    PRINT "Extract ${COMPONENT} content"
 #    unzip /tmp/${COMPONENT}.zip &>>${LOG}
