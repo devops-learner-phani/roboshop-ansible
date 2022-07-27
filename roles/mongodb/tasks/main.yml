@@ -26,17 +26,11 @@
     dest: /tmp
     remote_src: yes
 
-- name: Load Schema - catalogue and user
+- name: Load Schema 
   community.mongodb.mongodb_shell:
-    file: "/tmp/mongodb-main/{{item}}"
+    file: "/tmp/mongodb-main/{{item}}.js"
     idempotent: yes
-    debug:
-      msg: load schema = {{item}}
-    loop:
-      - catalogue.js
-      - user.js
+  loop:
+    - catalogue
+    - user
 
-- name: Load Schema - user
-  community.mongodb.mongodb_shell:
-    file: "/tmp/mongodb-main/{{item}}"
-    idempotent: yes    
