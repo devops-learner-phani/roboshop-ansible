@@ -1,0 +1,21 @@
+- name: Copy {{ COMPONENT }} yum repo
+  ansible.builtin.template:
+    src: {{ COMPONENT }}.repo
+    dest: /etc/yum.repos.d/{{ COMPONENT }}.repo
+
+- name: Install {{ COMPONENT }}
+  ansible.builtin.yum:
+    name: redis-6.2.7
+    state: installed
+
+- name: Relpace the listen address of {{ COMPONENT }} configuration file
+  ansible.builtin.replace:
+    path: /etc/{{ COMPONENT }}.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: restart {{ COMPONENT }} service
+  ansible.builtin.systemd:
+    name: redis
+    state: restarted
+    enabled: yes      
