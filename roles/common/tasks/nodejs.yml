@@ -1,0 +1,26 @@
+
+#
+#PRINT "Installing the nodejs"
+#yum install nodejs -y &>>${LOG}
+#CHECK_STAT $?
+#
+#APP_COMMON_SETUP
+#
+#PRINT "Install nodejs dependencies"
+#npm install &>>${LOG}
+#CHECK_STAT $?
+#
+#SYSTEMD
+
+- name: Copy NodeJS yum repo
+  ansible.builtin.shell: https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: Install Nodejs
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: Import common app setup
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
