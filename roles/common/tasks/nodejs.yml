@@ -14,7 +14,7 @@
 - name: Install NodeJS Dependencies
   community.general.npm:
     path: "{{ APP_LOCATION }}"
-    
+    remote_src: yes
 
     
 
