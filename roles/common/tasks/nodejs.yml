@@ -6,6 +6,12 @@
     name: nodejs
     state: installed
 
+- name: Import common app setup configuration
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+
 
     
 
