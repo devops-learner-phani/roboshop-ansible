@@ -1,3 +1,0 @@
-COMPONENT: catalogue
-APP_LOCATION: /home/roboshop/{{ COMPONENT }}
-SUFFIX: /
