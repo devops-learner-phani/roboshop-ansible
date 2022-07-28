@@ -56,3 +56,9 @@
 #    name: mysqld
 #    state: restarted
 #    enabled: yes
+
+- name: Fail if the MYSQL_PASSWORD does not exists
+  ansible.builtin.fail:
+    msg: MYSQL_PASSWORD variable is missing
+  when: MYSQL_PASSWORD is false
+
