@@ -44,4 +44,20 @@
     state: restarted
     enabled: yes
 
-    
+- name: Find out what the remote machine's mounts are
+  ansible.builtin.slurp:
+    src: /var/log/mysqld.log
+  register: mysql_log
+
+- name: PRINT
+  debug:
+    msg: {{mysql_log}}
+
+
+
+
+
+
+
+
+
