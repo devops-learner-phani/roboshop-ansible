@@ -10,9 +10,12 @@
 
 - name: Relpace the listen address of {{ COMPONENT }} configuration file
   ansible.builtin.replace:
-    path: /etc/redis.conf
+    path: "{{item}}"
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
+  loop:
+    - /etc/redis.conf
+    - /etc/redis/redis.conf
 
 - name: restart {{ COMPONENT }} service
   ansible.builtin.systemd:
