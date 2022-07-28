@@ -1,22 +1,3 @@
-
-#if [ -z "${MYSQL_PASSWORD}" ]; then
-#echo "Need MYSQL_PASSWORD env varaible"
-#exit 1
-#fi
-#
-#PRINT "Configure yum repos"
-#curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo &>>${LOG}
-#CHECK_STAT $?
-#
-#PRINT "Install mysql"
-#yum install mysql-community-server -y &>>${LOG}
-#CHECK_STAT $?
-#
-#PRINT "Start mysql service"
-#systemctl start mysqld &>>${LOG} && systemctl enable mysqld &>>${LOG}
-#CHECK_STAT $?
-#
-#
 #MYSQL_DEFAULT_PASSWORD=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 #
 #echo show databases | mysql -uroot -p"${MYSQL_PASSWORD}" &>>${LOG}
@@ -41,24 +22,26 @@
 #cd /tmp && unzip -o mysql.zip &>>${LOG} && cd mysql-main && mysql -uroot -p"${MYSQL_PASSWORD}" <shipping.sql &>>${LOG}
 #CHECK_STAT $?
 
-#- name: Copy MYSQL yum repo
-#  ansible.builtin.template:
-#    src: mysql.repo
-#    dest: /etc/yum.repos.d/mysql.repo
-#
-#- name: Install Mysql
-#  ansible.builtin.yum:
-#    name: mysql-community-server
-#    state: installed
-#
-#- name: start MYSQL service
-#  ansible.builtin.systemd:
-#    name: mysqld
-#    state: restarted
-#    enabled: yes
 
 - name: Fail if the MYSQL_PASSWORD does not exists
   ansible.builtin.fail:
     msg: MYSQL_PASSWORD variable is missing
   when: MYSQL_PASSWORD is undefined
 
+- name: copy Mysql repo file
+  ansible.builtin.template:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Install Mysql
+  ansible.builtin.yum:
+    name: mysql-community-server
+    state: installed
+
+- name: start MYSQL service
+  ansible.builtin.systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
+
+    
