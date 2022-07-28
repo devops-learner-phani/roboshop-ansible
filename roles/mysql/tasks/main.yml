@@ -35,7 +35,9 @@
 
 - name: Install Mysql
   ansible.builtin.yum:
-    name: mysql-community-server
+    name:
+      - mysql-community-server
+      - python36-PyMySQL
     state: installed
 
 - name: start MYSQL service
