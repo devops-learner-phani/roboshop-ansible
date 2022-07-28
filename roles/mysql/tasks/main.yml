@@ -51,7 +51,7 @@
 
 - name: PRINT
   debug:
-    msg: "{{mysql_log | b64decode}}"
+    msg: "{{mysql_log['content'] | b64decode}}"
 
 
 
