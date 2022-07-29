@@ -1,5 +1,3 @@
-
-
 #echo show databases | mysql -uroot -p"${MYSQL_PASSWORD}" &>>${LOG}
 #if [ $? -ne 0 ]; then
 #PRINT "Reset root password"
@@ -55,13 +53,26 @@
   ansible.builtin.set_fact:
     DEFAULT_PASSWORD: "{{mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last}}"
 
-- name: Check MYSQL_PASSWORD is reser or not
+- name: Check MYSQL_PASSWORD is reset or not
   community.mysql.mysql_info:
     login_user: root
     login_password: "{{MYSQL_PASSWORD}}"
     filter: version
   ignore_errors: yes
-    
+  register: mysql_connection
+
+- name: Copy MYSQL reset file
+  ansible.builtin.template:
+    src: root-pass.sql
+    dest: /tmp
+
+- name: Reset the MYSQL root password
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /tmp/root-pass.sql
+    login_user: root
+    login_password: "{{DEFAULT_PASSWORD}}"
 
 
 
