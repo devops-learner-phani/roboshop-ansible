@@ -1,10 +1,4 @@
-#echo show databases | mysql -uroot -p"${MYSQL_PASSWORD}" &>>${LOG}
-#if [ $? -ne 0 ]; then
-#PRINT "Reset root password"
-#echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';" | mysql  --connect-expired-password -uroot -p"${MYSQL_DEFAULT_PASSWORD}" &>>${LOG}
-#CHECK_STAT $?
-#fi
-#
+
 #echo show plugins | mysql -uroot -p"${MYSQL_PASSWORD}" 2>>${LOG} | grep validate_password &>>${LOG}
 #if [ $? -eq 0 ]; then
 #PRINT "uninstall password validate plugin"
@@ -73,8 +67,14 @@
 #    login_user: root
 #    login_password: "{{DEFAULT_PASSWORD}}"
 
-
-
+- name: check validate password plugin
+  ansible.builtin.shell: echo show plugins | mysql -uroot -p"${MYSQL_PASSWORD}" 2>>${LOG} | grep validate_password
+  register: plugin_info
+  ignore_errors: yes
+    
+- name: Remove validate password plugin
+  ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"{{MYSQL_PASSWORD}}"
+  when: plugin_info is succeeded
 
 
 
