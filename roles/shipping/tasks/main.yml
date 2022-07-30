@@ -8,13 +8,10 @@
     name: common
     tasks_from: download
 
-- name: Running mvn clean
-  shell: "mvn clean install"
-  register: mvn_result
-
-- name: "mvn clean task output"
-  debug:
-    var: mvn_result
+- name: Install mvn clean
+  ansible.builtin.yum:
+    name: mvn clean package
+    state: installed
 
 - name: Copy {{ COMPONENT }} code
   ansible.builtin.copy:
