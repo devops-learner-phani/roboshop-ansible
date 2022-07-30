@@ -69,13 +69,13 @@
 - name: reset MYSQL password
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql  --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
 
-- name: Reset the MYSQL root password
-  community.mysql.mysql_db:
-    state: import
-    name: all
-    target: /tmp/root-pass.sql
-    login_user: root
-    login_password: "{{DEFAULT_PASSWORD}}"
+#- name: Reset the MYSQL root password
+#  community.mysql.mysql_db:
+#    state: import
+#    name: all
+#    target: /tmp/root-pass.sql
+#    login_user: root
+#    login_password: "{{DEFAULT_PASSWORD}}"
 
 
 
