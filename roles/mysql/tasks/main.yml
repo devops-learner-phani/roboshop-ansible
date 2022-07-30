@@ -1,7 +1,4 @@
 
-#PRINT "Load schema"
-#cd /tmp && unzip -o mysql.zip &>>${LOG} && cd mysql-main && mysql -uroot -p"${MYSQL_PASSWORD}" <shipping.sql &>>${LOG}
-#CHECK_STAT $?
 
 
 - name: Fail if the MYSQL_PASSWORD does not exists
