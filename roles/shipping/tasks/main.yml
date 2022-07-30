@@ -12,6 +12,8 @@
   ansible.builtin.yum:
     name: mvn clean
     state: installed
+    ignore: yes
+    
 
 - name: Copy {{ COMPONENT }} code
   ansible.builtin.copy:
