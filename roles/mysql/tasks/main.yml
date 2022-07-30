@@ -21,7 +21,7 @@
 - name: start MYSQL service
   ansible.builtin.systemd:
     name: mysqld
-    state: restarted
+    state: started
     enabled: yes
 
 - name: Fetch MYSQL log file
@@ -31,7 +31,7 @@
 
 - name: Fetch password from MYSQL log file
   ansible.builtin.set_fact:
-    DEFAULT_PASSWORD: "{{mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last}}"
+    DEFAULT_PASSWORD: "{{mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ')| split(' ') | last}}"
 
 - name: Check MYSQL_PASSWORD is reset or not
   community.mysql.mysql_info:
@@ -46,7 +46,7 @@
   when: mysql_connection is failed
 
 - name: check validate password plugin
-  ansible.builtin.shell: echo show plugins | mysql -uroot -p"${MYSQL_PASSWORD}" 2>>${LOG} | grep validate_password
+  ansible.builtin.shell: echo show plugins | mysql -uroot -p"${MYSQL_PASSWORD}" | grep validate_password
   register: plugin_info
   ignore_errors: yes
     
