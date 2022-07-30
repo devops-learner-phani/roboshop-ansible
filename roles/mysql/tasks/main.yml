@@ -61,11 +61,6 @@
   ignore_errors: yes
   register: mysql_connection
 
-- name: Copy MYSQL reset file
-  ansible.builtin.template:
-    src: root-pass.sql
-    dest: /tmp
-
 - name: reset MYSQL password
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql  --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
 
