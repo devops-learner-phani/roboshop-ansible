@@ -1,6 +1,3 @@
-
-
-
 - name: Fail if the MYSQL_PASSWORD does not exists
   ansible.builtin.fail:
     msg: MYSQL_PASSWORD variable is missing
@@ -39,11 +36,11 @@
     login_password: "{{MYSQL_PASSWORD}}"
     filter: version
   ignore_errors: yes
-  register: mysql_connection
+  register: mysql_connection       
 
 - name: reset MYSQL password
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql  --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
-  when: mysql_connection is failed
+  when: mysql_connection is failed    
 
 - name: check validate password plugin
   ansible.builtin.shell: echo show plugins | mysql -uroot -p"{{MYSQL_PASSWORD}}" | grep validate_password

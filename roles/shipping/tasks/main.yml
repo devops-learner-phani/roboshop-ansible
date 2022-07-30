@@ -1,0 +1,29 @@
+- name: Install maven
+  ansible.builtin.yum:
+    name: maven
+    state: installed
+
+- name: copy {{ COMPONENT }} content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Running mvn clean
+  shell: "mvn clean install"
+  register: mvn_result
+
+- name: "mvn clean task output"
+  debug:
+    var: mvn_result
+
+- name: Copy {{ COMPONENT }} code
+  ansible.builtin.copy:
+    src: /tmp/{{ COMPONENT }}/target/{{ COMPONENT }}-1.0.jar
+    dest: "{{ APP_LOCATION }}/"
+    remote_src: yes
+
+- name: Systemd setup for {{ COMPONENT }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
+
