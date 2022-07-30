@@ -10,7 +10,7 @@
 
 - name: Install mvn clean
   ansible.builtin.yum:
-    name: mvn clean package
+    name: mvn clean
     state: installed
 
 - name: Copy {{ COMPONENT }} code
