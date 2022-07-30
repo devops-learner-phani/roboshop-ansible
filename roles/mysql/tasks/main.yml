@@ -66,7 +66,7 @@
     src: root-pass.sql
     dest: /tmp
 
-- name: create MYSQL password
+- name: reset MYSQL password
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql  --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
 
 - name: Reset the MYSQL root password
