@@ -20,6 +20,15 @@
   debug:
     msg: "{{app_user}}"
 
+- name: update {{ COMPONENT }} configuration with root permissions
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{ COMPONENT }}/{{ COMPONENT }}.ini
+    regexp: '^{item.key}'
+    line: "{{item.line}}"
+    loop:
+      - {key="uid", line: "uid = {{app_user.uid}}"}
+      - {key="gid", line: "gid = {{app_user.group}}"}
+
 #- name: Give root permissions to user and group
 #  ansible.builtin.user:
 #    name: roboshop
