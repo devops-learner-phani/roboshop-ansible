@@ -1,0 +1,26 @@
+
+PRINT "Installing dependencies"
+go mod init dispatch  &>>${LOG} && go get  &>>${LOG} && go build  &>>${LOG}
+CHECK_STAT $?
+
+SYSTEMD
+
+- name: Install golang
+  ansible.builtin.yum:
+    name: golang
+    state: installed
+
+- name: App setup {{ COMPONENT }} content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Install golang dependencies
+  ansible.builtin.shell: go mod init dispatch && go get && go build
+  args:
+    chdir: /home/roboshop/{{ COMPONENT }}
+
+- name: Systemd setup for {{ COMPONENT }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
