@@ -1,16 +1,3 @@
-
-
-rabbitmqctl list_users | grep roboshop &>>${LOG}
-if [ $? -ne 0 ]; then
-PRINT "Create rabbitmq user"
-rabbitmqctl add_user roboshop "${RABBITMQ_USER_PASSWORD}" &>>${LOG}
-CHECK_STAT $?
-fi
-
-PRINT "User tags and permissions"
-rabbitmqctl set_user_tags roboshop administrator &>>${LOG} && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>${LOG}
-CHECK_STAT $?
-
 - name: Fail if the RABBITMQ_USER_PASSWORD does not exists
   ansible.builtin.fail:
     msg: RABBITMQ_USER_PASSWORD variable is missing
@@ -31,6 +18,18 @@ CHECK_STAT $?
     name: rabbitmq-server
     state: restarted
     enable: yes
+
+- name: Create roboshop app user
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: "{{RABBITMQ_USER_PASSWORD}}"
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
+    tags: administrator
+
 
 
 
