@@ -15,10 +15,6 @@
   ansible.builtin.pip:
     requirements: "{{ APP_LOCATION }}/requirements.txt"
     executable: pip3
-    
-- name: print
-  debug:
-    msg: "{{app_user}}"
 
 - name: update {{ COMPONENT }} configuration with root permissions
   ansible.builtin.lineinfile:
