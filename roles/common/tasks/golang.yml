@@ -1,10 +1,3 @@
-
-PRINT "Installing dependencies"
-go mod init dispatch  &>>${LOG} && go get  &>>${LOG} && go build  &>>${LOG}
-CHECK_STAT $?
-
-SYSTEMD
-
 - name: Install golang
   ansible.builtin.yum:
     name: golang
