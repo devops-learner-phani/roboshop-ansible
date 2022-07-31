@@ -36,9 +36,5 @@
     tasks_from: systemd
 
 
-#
-#PRINT "Update ${COMPONENT} configuration"
-#sed -i -e "/^uid/ c uid = ${USER_ID}" -e "/^gid/ c gid = ${GROUP_ID}" /home/roboshop/${COMPONENT}/${COMPONENT}.ini &>>${LOG}
-#CHECK_STAT $?
 
 
