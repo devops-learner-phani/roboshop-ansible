@@ -25,6 +25,11 @@
       - {key="uid", line: "uid = {{app_user.uid}}"}
       - {key="gid", line: "gid = {{app_user.group}}"}
 
+- name: Systemd setup for {{ COMPONENT }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
+
 #- name: Give root permissions to user and group
 #  ansible.builtin.user:
 #    name: roboshop
