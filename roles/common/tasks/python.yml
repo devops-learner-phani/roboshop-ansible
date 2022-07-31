@@ -6,7 +6,7 @@
       - python3-devel
     state: installed
 
-- name: Copy {{ COMPONENT }} content
+- name: Import common app setup configuration
   ansible.builtin.include_role:
     name: common
     tasks_from: download
