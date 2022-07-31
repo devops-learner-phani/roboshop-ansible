@@ -16,7 +16,7 @@
 - name: Restart rabbitmq service
   ansible.builtin.systemd:
     name: rabbitmq-server
-    state: restarted
+    state: started
     enable: yes
 
 - name: Create roboshop app user
