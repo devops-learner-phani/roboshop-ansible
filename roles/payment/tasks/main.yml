@@ -1,4 +1,4 @@
-#- name: Import Common Role- python
-#  ansible.builtin.include_role:
-#    name: common
-#    tasks_from: python
+- name: Import Common Role- python
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: python

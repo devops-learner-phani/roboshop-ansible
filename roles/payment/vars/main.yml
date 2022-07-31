@@ -1,3 +1,3 @@
-#COMPONENT: payment
-#APP_LOCATION: /home/roboshop/{{ COMPONENT }}
-#SUFFIX: /
+COMPONENT: payment
+APP_LOCATION: /home/roboshop/{{ COMPONENT }}
+SUFFIX: /
