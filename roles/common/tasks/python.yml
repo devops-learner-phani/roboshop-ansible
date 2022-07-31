@@ -21,27 +21,19 @@
     path: /home/roboshop/{{ COMPONENT }}/{{ COMPONENT }}.ini
     regexp: '^{item.key}'
     line: "{{item.line}}"
-    loop:
-      - {key="uid", line: "uid = {{app_user.uid}}"}
-      - {key="gid", line: "gid = {{app_user.group}}"}
+  loop:
+    - {key="uid", line: "uid = {{app_user.uid}}"}
+    - {key="gid", line: "gid = {{app_user.group}}"}
 
 - name: Systemd setup for {{ COMPONENT }}
   ansible.builtin.include_role:
     name: common
     tasks_from: systemd
 
-#- name: Give root permissions to user and group
-#  ansible.builtin.user:
-#    name: roboshop
-#    comment:
-#    uid: USER_ID=$(id -u roboshop)
-#    group: GROUP_ID=$(id -g roboshop)
-##USER_ID=$(id -u roboshop)
-#GROUP_ID=$(id -g roboshop)
+
 #
 #PRINT "Update ${COMPONENT} configuration"
 #sed -i -e "/^uid/ c uid = ${USER_ID}" -e "/^gid/ c gid = ${GROUP_ID}" /home/roboshop/${COMPONENT}/${COMPONENT}.ini &>>${LOG}
 #CHECK_STAT $?
-#
-#SYSTEMD
+
 
