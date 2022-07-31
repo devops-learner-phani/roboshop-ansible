@@ -19,4 +19,4 @@ rabbitmq.roboshop.internal
 [PAYMENT]
 payment.roboshop.internal
 [DISPATCH]
-disptach.roboshop.internal
+dispatch.roboshop.internal
