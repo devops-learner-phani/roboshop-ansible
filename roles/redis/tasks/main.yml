@@ -8,7 +8,7 @@
     name: redis-6.2.7
     state: installed
 
-- name: Relpace the listen address of {{ COMPONENT }} configuration file
+- name: Replace the listen address of {{ COMPONENT }} configuration file
   ansible.builtin.replace:
     path: "{{item}}"
     regexp: '127.0.0.1'
