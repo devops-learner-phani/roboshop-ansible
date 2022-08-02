@@ -1,3 +1,8 @@
+- name: Fail if the RABBITMQ_USER_PASSWORD does not exists
+  ansible.builtin.fail:
+    msg: RABBITMQ_USER_PASSWORD variable is missing
+  when: RABBITMQ_USER_PASSWORD is undefined
+
 - name: Import Common Role- python
   ansible.builtin.include_role:
     name: common
