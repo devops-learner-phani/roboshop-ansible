@@ -11,10 +11,10 @@
     name: common
     tasks_from: download
 
-#- name: Install nodejs dependencies
-#  community.general.npm:
-#    path: "{{APP_LOCATION}}"
-#
+- name: Install nodejs dependencies
+  community.general.npm:
+    path: "{{APP_LOCATION}}"
+
 #- name: Include common role for systemd service
 #  ansible.builtin.include_role:
 #    name: common
