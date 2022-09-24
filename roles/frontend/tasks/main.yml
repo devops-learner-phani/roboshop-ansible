@@ -1,0 +1,21 @@
+- name: Install nginx service
+  ansible.builtin.yum:
+    name: nginx
+    state: installed
+
+- name: Include common role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Update systemd service
+  ansible.builtin.template:
+    src: mysql.repo
+    dest: /etc/nginx/default.d/mysql.repo
+
+- name: Start the {{COMPONENT}} service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+

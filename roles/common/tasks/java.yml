@@ -1,0 +1,19 @@
+- name: Install macen
+  ansible.builtin.yum:
+    name: maven
+    state: installed
+
+- name: Include common role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Install maven dependencies
+  ansible.builtin.shell: mvn clean package mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
+  args:
+    chdir: "{{APP_LOCATION}}"
+
+- name: Include common role for systemd service
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
