@@ -22,6 +22,7 @@
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/refs/heads/main.zip
     dest: /tmp
+    remote_src: yes
 
 - name: Organise the content
   ansible.builtin.copy:
