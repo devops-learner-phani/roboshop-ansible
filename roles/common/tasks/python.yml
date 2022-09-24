@@ -19,7 +19,7 @@
 - name: Install python dependencies
   ansible.builtin.pip:
     requirements: "{{APP_LOCATION}}/requirements.txt"
-    executable: pip3.3
+    executable: pip3
 
 - name: Update uid and gid of roboshop user
   ansible.builtin.lineinfile:
