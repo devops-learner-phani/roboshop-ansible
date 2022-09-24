@@ -3,6 +3,7 @@
 #    name: roboshop
 #  register: app_user
 
+
 - name: Remove app location
   ansible.builtin.file:
     path: "{{APP_LOCATION}}"
@@ -17,6 +18,7 @@
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
     dest: /tmp
+    remote_src: yes
 
 - name: Organise the content
   ansible.builtin.copy:
