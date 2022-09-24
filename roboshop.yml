@@ -1,4 +1,5 @@
 - name: Create Job
   hosts: "{{HOST}}"
+  become: yes
   roles:
     - "{{ROLE}}"
