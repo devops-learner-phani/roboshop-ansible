@@ -1,29 +1,29 @@
-#- name: Fail if MYSQL_PASSWORD does not exist
-#  ansible.builtin.fail:
-#    msg: Needed MYSQL_PASSWORD variable
-#  when: MYSQL_PASSWORD is undefined
-#
-#- name: Configure {{COMPONENT}} repo
-#  ansible.builtin.template:
-#    src: mysql.repo
-#    dest: /etc/yum.repos.d/mysql.repo
-#
-#- name: Install mysql service
-#  ansible.builtin.yum:
-#    name: mysql-community-server
-#    state: installed
-#
-#- name: Start the {{COMPONENT}} service
-#  ansible.builtin.systemd:
-#    name: mysqld
-#    state: started
-#    enabled: yes
-#
+- name: Fail if MYSQL_PASSWORD does not exist
+  ansible.builtin.fail:
+    msg: Needed MYSQL_PASSWORD variable
+  when: MYSQL_PASSWORD is undefined
+
+- name: Configure {{COMPONENT}} repo
+  ansible.builtin.template:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Install mysql service
+  ansible.builtin.yum:
+    name: mysql-community-server
+    state: installed
+
+- name: Start the {{COMPONENT}} service
+  ansible.builtin.systemd:
+    name: mysqld
+    state: started
+    enabled: yes
+
 #- name: Check mysql log file
 #  ansible.builtin.slurp:
 #    src: /var/log/mysqld.log
-#  register: "{{mysql_log}}"
-#
+#  register: mysql_log
+
 #- name: Check DEFAULT_PASSWORD
 #  ansible.builtin.set_fact:
 #    DEFAULT_PASSWORD: "{{mysql_log ['content'] | b64decode | regex_search('.*temporary password.*') | split(' ') | last}}"
@@ -33,38 +33,40 @@
 #    login_user: root
 #    login_password: "{{MYSQL_PASSWORD}}"
 #    filter: version
-#    ignore_errors: yes
-#    register: mysql_conn
+#  ignore_errors: yes
+#  register: mysql_conn
 #
 #- name: reset MYSQL_PASSWORD password
-#  ansible.builtin.shell:   echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql  --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
+#  ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql  --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
 #  when: mysql_conn is failed
 #
 #- name: check the validate password
-#  ansible.builtin.shell:   echo show plugins | mysql -uroot -p"{{MYSQL_PASSWORD}}" | grep validate_password
-#  ignore_errors: yes
+#  ansible.builtin.shell: echo show plugins | mysql -uroot -p"{{MYSQL_PASSWORD}}" | grep validate_password
 #  register: plugin_info
+#  ignore_errors: yes
 #
 #- name: Uninstall the validate plugin
-#  ansible.builtin.shell:   echo "uninstall plugin validate_password;" | mysql -uroot -p"{{MYSQL_PASSWORD}}"
+#  ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"{{MYSQL_PASSWORD}}"
 #  when: plugin_info is succeeded
 #
-#- name: download Schema
+#- name: download and  Extract {{COMPONENT}} content
 #  ansible.builtin.unarchive:
-#    src: "https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip"
+#    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
 #    dest: /tmp
+#    remote_src: yes
 #
 #- name: Load Schema
 #  community.mysql.mysql_db:
 #    state: import
 #    name: all
+#    target: /tmp/mysql-main/shipping.sql
 #    login_user: root
 #    login_password: "{{MYSQL_PASSWORD}}"
-#    target: /tmp/mysql-main/shipping.sql
-#
-#
-#
-#
-#
-#
-#
+
+
+
+
+
+
+
+
