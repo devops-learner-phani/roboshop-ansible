@@ -1,8 +1,7 @@
-#- name: Add application user
-#  ansible.builtin.user:
-#    name: roboshop
-#  register: app_user
-
+- name: Add application user
+  ansible.builtin.user:
+    name: roboshop
+  register: app_user
 
 - name: Remove app location
   ansible.builtin.file:
