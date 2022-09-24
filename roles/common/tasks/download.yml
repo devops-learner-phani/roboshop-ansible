@@ -20,6 +20,6 @@
 
 - name: Organise the content
   ansible.builtin.copy:
-    src: {{COMPONENT}}-main/{{SUFFIX}}
+    src: "{{COMPONENT}}-main/{{SUFFIX}}"
     dest: "{{APP_LOCATION}}/"
 
