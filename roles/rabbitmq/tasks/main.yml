@@ -15,7 +15,7 @@
 
 - name: Start the {{COMPONENT}} service
   ansible.builtin.systemd:
-    name: "{{COMPONENT}}"
+    name: rabbitmq-server
     state: started
     enabled: yes
     daemon_reload: yes
