@@ -15,11 +15,11 @@
 
 - name: download and  Extract {{COMPONENT}} content
   ansible.builtin.unarchive:
-    src: "https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip"
+    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
     dest: /tmp
 
 - name: Organise the content
   ansible.builtin.copy:
-    src: "{{COMPONENT}}-main/{{SUFFIX}}"
+    src: /tmp/{{COMPONENT}}-main/{{SUFFIX}}
     dest: "{{APP_LOCATION}}/"
 
