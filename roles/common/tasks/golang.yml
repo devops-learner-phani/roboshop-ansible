@@ -29,7 +29,7 @@
 #    dest: "{{APP_LOCATION}}/"
 #
 #- name: Install golang dependencies
-#  ansible.builtin.shell: go mod init {{COMPONENT}} go get go build
+#  ansible.builtin.shell: go mod init {{COMPONENT}} && go get && go build
 #  args:
 #    chdir: "{{APP_LOCATION}}"
 #
