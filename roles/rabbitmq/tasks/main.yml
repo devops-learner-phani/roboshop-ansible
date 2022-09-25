@@ -2,6 +2,11 @@
   ansible.builtin.fail:
     msg: Needed RABBITMQ_USER_PASSWORD variable
   when: RABBITMQ_USER_PASSWORD is undefined
+  register: RABBIT
+
+- name: print
+  debug:
+    msg: "{{RABBIT}}"
 
 - name: Configure yum repo
   ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
