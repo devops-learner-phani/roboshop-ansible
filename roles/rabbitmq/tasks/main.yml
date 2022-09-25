@@ -6,7 +6,7 @@
 
 - name: print
   debug:
-    msg: "{{RABBIT}}"
+    msg: RABBIT
 
 - name: Configure yum repo
   ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
