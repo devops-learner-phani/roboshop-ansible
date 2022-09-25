@@ -3,9 +3,10 @@
     msg: Needed RABBITMQ_USER_PASSWORD variable
   when: RABBITMQ_USER_PASSWORD is undefined
   register: user_pass
+
 - name: print
   debug:
-    msg: "{{ user_pass }}
+    msg: "{{user_pass}}"
 
 - name: Configure yum repo
   ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
