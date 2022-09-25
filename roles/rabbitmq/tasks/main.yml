@@ -2,13 +2,6 @@
   ansible.builtin.fail:
     msg: Needed RABBITMQ_USER_PASSWORD variable
   when: RABBITMQ_USER_PASSWORD is undefined
-  
-
-- name: print
-  debug:
-    msg: "{{RABBITMQ_USER_PASSWORD}}"
-
-
 
 - name: Configure yum repo
   ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
@@ -26,7 +19,6 @@
     state: started
     enabled: yes
     daemon_reload: yes
-
 
 - name: Create roboshop user and give tags and permissions
   community.rabbitmq.rabbitmq_user:
