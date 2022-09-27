@@ -48,9 +48,6 @@
   roles:
     - "payment"
 
-- hosts: DISPATCH
-  become: yes
-  roles:
-    - "dispatch"
+
 
 

@@ -18,6 +18,5 @@ shipping.roboshop.internal
 rabbitmq.roboshop.internal
 [PAYMENT]
 payment.roboshop.internal
-[DISPATCH]
-dispatch.roboshop.internal
+
 
