@@ -6,10 +6,10 @@ SG_NAME="allow-all-to-public"
 IAM_INSTANCE_PROFILE="Arn=arn:aws:iam::645019601948:instance-profile/role-for-aws-secret-manager-roboshop"
 #############################
 
-if [ -z "${1}" ] ; then
-  echo ENV=""
+if [ -z "${1}" ]; then
+  ENV=""
 else
-  echo ENV="-$1"
+  ENV="-$1"
 fi
 COMPONENT=all
 create_ec2() {
