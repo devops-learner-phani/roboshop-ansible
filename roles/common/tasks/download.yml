@@ -12,17 +12,40 @@
   ansible.builtin.file:
     path: "{{APP_LOCATION}}"
     state: directory
+#
+#- name: download and  Extract {{COMPONENT}} content
+#  ansible.builtin.unarchive:
+#    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
+#    dest: /tmp
+#    remote_src: yes
+#
+#- name: Organise the content
+#  ansible.builtin.copy:
+#    src: /tmp/{{COMPONENT}}-main/{{SUFFIX}}
+#    dest: "{{APP_LOCATION}}/"
+#    remote_src: yes
 
-- name: download and  Extract {{COMPONENT}} content
+
+
+- name: Download the latest version of nexus
+  ansible.builtin.shell: curl -s http://3.239.52.124:8081/service/rest/repository/browse/{{COMPONENT}}/ | grep zip | sed 's/"/ /'g | xargs -n1 | grep ^http | tail -n1
+  register: out
+  when: APP_VERSION is not defined
+
+- name: Declare the URL fact for latest version of nexus
+  ansible.builtin.set_fact:
+    URL: "{{out.stdout}}"
+  when: APP_VERSION is not defined
+
+- name: Declare the URL fact
+  ansible.builtin.set_fact:
+    URL: "http://nexus.roboshop.internal:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip"
+  when: APP_VERSION is defined
+
+- name: download and  Extract {{COMPONENT}} content from nexus
   ansible.builtin.unarchive:
-    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
-    dest: /tmp
-    remote_src: yes
-
-- name: Organise the content
-  ansible.builtin.copy:
-    src: /tmp/{{COMPONENT}}-main/{{SUFFIX}}
-    dest: "{{APP_LOCATION}}/"
+    src: "{{URL}}"
+    dest: "{{APP_LOCATION}}"
     remote_src: yes
 
 
