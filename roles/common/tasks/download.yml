@@ -39,7 +39,7 @@
 
 - name: Declare the URL fact
   ansible.builtin.set_fact:
-    URL: "http://nexus.roboshop.internal:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip"
+    URL: http://nexus.roboshop.internal:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
   when: APP_VERSION is defined
 
 - name: download and  Extract {{COMPONENT}} content from nexus
