@@ -13,7 +13,7 @@
     name: prometheus
     state: restarted
 
-- name: Check the prometheus server is running or not
+- name: Check the alert manager server is running or not
   ansible.builtin.wait_for:
     host: 0.0.0.0
     port: 9090
@@ -25,7 +25,7 @@
     src: alertmanager.yml
     dest: /opt/alertmanager/alertmanager.
 
-- name: Restart alertmanger
+- name: Restart alertmanager
   ansible.builtin.systemd:
     name: alertmanager
     state: restarted
