@@ -7,8 +7,8 @@ groups:
         labels:
           severity: critical
         annotations:{% raw %}
-          summary: "Instance Down - [{{ $labels.instance}}]"
-          description: "Instance Down - [{{ $labels.instance}}]"{% endraw %}
+          summary: "Instance Down - [{{ $labels.instance }}]"
+          description: "Instance Down - [{{ $labels.instance }}]"{% endraw %}
 
 
       - alert: ServerDown
@@ -17,5 +17,5 @@ groups:
         labels:
           severity: critical
         annotations:{% raw %}
-          summary: "Server Down - [{{ $labels.exported_name}}]"
-          description: "Server Down - [{{ $labels.exported_name}}]"{% endraw %}
+          summary: "Server Down - [{{ $labels.exported_name }}]"
+          description: "Server Down - [{{ $labels.exported_name }}]"{% endraw %}
