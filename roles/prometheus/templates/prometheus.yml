@@ -31,7 +31,7 @@
 #        target_label: private_ip
 
 
-# my global config
+
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -52,7 +52,9 @@ scrape_configs:
     ec2_sd_configs:
       - region: us-east-1
         port: 9100
-    
+        filters:
+         - name: "tag:Monitor"
+           values: ["yes"]
 
 
 
