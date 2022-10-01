@@ -52,8 +52,7 @@ scrape_configs:
     ec2_sd_configs:
       - region: us-east-1
         port: 9100
-    static_configs:
-      - targets: ["172.31.5.99:9100"]
+    
 
 
 
