@@ -10,8 +10,8 @@
 
 - name: Update systemd service
   ansible.builtin.template:
-    src: roboshop.conf
-    dest: /etc/nginx/default.d/roboshop.conf
+    src: rsyslog.conf
+    dest: /etc/nginx/default.d/rsyslog.conf
 
 - name: Start the {{COMPONENT}} service
   ansible.builtin.systemd:
