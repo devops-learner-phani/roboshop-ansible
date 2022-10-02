@@ -1,4 +1,4 @@
-- name: elk server setup
+- name: Setup RSYSLOG Config
   ansible.builtin.include_role:
     name: elk
     tasks_from: rsyslog
