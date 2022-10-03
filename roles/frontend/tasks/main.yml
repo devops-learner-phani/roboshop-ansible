@@ -13,6 +13,11 @@
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
 
+- name: Update Nginx service
+  ansible.builtin.template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+
 - name: Start the {{COMPONENT}} service
   ansible.builtin.systemd:
     name: nginx
