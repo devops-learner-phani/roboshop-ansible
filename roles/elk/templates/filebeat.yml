@@ -1,6 +1,5 @@
 filebeat.inputs:
   - type: log
-    id: my-filestream-id
     enabled: true
     paths:
       - /var/log/{{COMPONENT}}.log
@@ -18,10 +17,6 @@ filebeat.config.modules:
 setup.template.settings:
   index.number_of_shards: 1
 
-setup.ilm.enabled: false
-setup.template.name: "{{COMPONENT}}"
-setup.template.pattern: "{{COMPONENT}}"
-
 
 processors:
   - add_host_metadata:
@@ -29,3 +24,7 @@ processors:
   - add_cloud_metadata: ~
   - add_docker_metadata: ~
   - add_kubernetes_metadata: ~
+
+setup.ilm.enabled: false
+setup.template.name: "{{COMPONENT}}"
+setup.template.pattern: "{{COMPONENT}}"
