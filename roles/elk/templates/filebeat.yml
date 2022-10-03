@@ -18,7 +18,7 @@ filebeat.config.modules:
 setup.template.settings:
   index.number_of_shards: 1
 
-
+setup.ilm.enabled: false
 setup.template.name: "{{COMPONENT}}"
 setup.template.pattern: "{{COMPONENT}}"
 
