@@ -3,7 +3,7 @@
     src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
 
-- name: Restart elk
+- name: Install filebeat
   ansible.builtin.systemd:
     name: filebeat
-    state: restarted
+    state: installed
