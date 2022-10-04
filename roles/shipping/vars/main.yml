@@ -2,4 +2,6 @@ COMPONENT: "shipping"
 
 APP_LOCATION: /home/roboshop/{{COMPONENT}}
 SUFFIX: /
+LOG_TYPE: raw
+LOG_FILE: /var/log/shipping.log
 
