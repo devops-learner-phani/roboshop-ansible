@@ -4,6 +4,9 @@ filebeat.inputs:
     enabled: true
     paths:
       - "{{LOG_FILE}}"
+    fields:
+      component: {{COMPONENT}}
+      env: {{ENV}}}}
 
 {% if LOG_TYPE == "json" %}
 output.elasticsearch:
