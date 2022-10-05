@@ -1,23 +1,23 @@
 filebeat.inputs:
   - type: log
-    json.keys_under_root: true
     enabled: true
+    json.keys_under_root: true
     paths:
       - "{{LOG_FILE}}"
     fields:
+      env: {{ENV}}
       component: {{COMPONENT}}
-      env: {{ENV}}}}
 
-{% if LOG_TYPE == "json" %}
+{% if  LOG_TYPE == "json" %}
 output.elasticsearch:
   index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
-  hosts: [ "elasticsearch.roboshop.internal:9200" ]
+  hosts: ["elasticsearch.roboshop.internal:9200"]
 setup.ilm.enabled: false
 setup.template.name: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 setup.template.pattern: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 {% endif %}
 
-{% if LOG_TYPE == "raw" %}
+{% if  LOG_TYPE == "raw" %}
 output.logstash:
   hosts: ["elasticsearch.roboshop.internal:5044"]
 {% endif %}
