@@ -10,6 +10,22 @@ filebeat.inputs:
       env: {{ENV}}
       component: {{COMPONENT}}
 
+{% if  LOG_TYPE == "raw" %}
+output.logstash:
+  hosts: ["elasticsearch.roboshop.internal:5044"]
+{% endif %}
+
+{% if COMPONENT == "shipping" %}
+  multiline.type: pattern
+  multiline.pattern: '^2'
+  multiline.negate: true
+  multiline.match: after
+{% endif %}
+
+{% if  LOG_TYPE == "raw" %}
+include_lines: ['\[^2']
+{% endif %}
+
 {% if  LOG_TYPE == "json" %}
 output.elasticsearch:
   index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
@@ -18,20 +34,6 @@ setup.ilm.enabled: false
 setup.template.name: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 setup.template.pattern: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 {% endif %}
-
-{% if  LOG_TYPE == "raw" %}
-output.logstash:
-  hosts: ["elasticsearch.roboshop.internal:5044"]
-{% endif %}
-
-{% if COMPONENT == "shipping" %}
-  multiline.type: pattern
-  multiline.pattern: '^\['
-  multiline.negate: true
-  multiline.match: after
-{% endif %}
-
-
 
 # ==================================================================
 
