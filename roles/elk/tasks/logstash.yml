@@ -1,16 +1,16 @@
-#- name: Configure the logstash template
-#  ansible.builtin.template:
-#    src: logstash.conf
-#    dest: /etc/logstash/conf.d/logstash.conf
-#
-#- name: Restart LOGSTASH
-#  ansible.builtin.systemd:
-#    name: logstash
-#    state: restarted
-#
-#- name: Check for Log Stash service running or not
-#  ansible.builtin.wait_for:
-#    host: 0.0.0.0
-#    port: 5044
-#    delay: 30
-#    timeout: 60
+- name: Configure the logstash template
+  ansible.builtin.template:
+    src: logstash.conf
+    dest: /etc/logstash/conf.d/logstash.conf
+
+- name: Restart LOGSTASH
+  ansible.builtin.systemd:
+    name: logstash
+    state: restarted
+
+- name: Check for Log Stash service running or not
+  ansible.builtin.wait_for:
+    host: 0.0.0.0
+    port: 5044
+    delay: 30
+    timeout: 60
