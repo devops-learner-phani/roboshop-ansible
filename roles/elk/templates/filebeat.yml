@@ -6,9 +6,9 @@ filebeat.inputs:
   {% endif %}
   paths:
     - "{{LOG_FILE}}"
-    fields:
-      env: {{ENV}}
-      component: {{COMPONENT}}
+  fields:
+    env: {{ENV}}
+    component: {{COMPONENT}}
 
 {% if  LOG_TYPE == "raw" %}
 output.logstash:
