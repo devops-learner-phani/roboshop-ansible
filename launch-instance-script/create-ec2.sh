@@ -17,7 +17,7 @@ create_ec2() {
       --image-id ${AMI_ID} \
       --instance-type t2.micro \
       --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}${ENV}}, {Key=Monitor,Value=yes}]" \
-      --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}"\
+#      --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}"\
       --security-group-ids ${SGID} \
       --iam-instance-profile="${IAM_INSTANCE_PROFILE}" \
       | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
