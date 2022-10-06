@@ -1,11 +1,12 @@
 filebeat.inputs:
   - type: log
     enabled: true
-  {% if  LOG_TYPE == "json" %}
-    json.keys_under_root: true
-  {% endif %}
+    {% if  LOG_TYPE == "json" %}
+      json.keys_under_root: true
+    {% endif %}
+
   paths:
-    - "{{LOG_FILE}}"
+     - "{{LOG_FILE}}"
   fields:
     env: {{ENV}}
     component: {{COMPONENT}}
