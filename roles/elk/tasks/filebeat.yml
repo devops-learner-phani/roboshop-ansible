@@ -1,9 +1,9 @@
-- name: Configure the Elastic search template
+- name: Copy Elasticsearch Repo file
   ansible.builtin.template:
     src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
 
-- name: Install filebeat
+- name: Install Filebeat
   ansible.builtin.yum:
     name: filebeat
     state: installed
@@ -13,7 +13,7 @@
     src: filebeat.yml
     dest: /etc/filebeat/filebeat.yml
 
-- name: restart filebeat
+- name: Start Filebeat
   ansible.builtin.systemd:
     name: filebeat
     state: restarted
