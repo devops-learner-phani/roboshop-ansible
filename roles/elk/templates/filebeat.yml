@@ -21,8 +21,7 @@ output.logstash:
   multiline.negate: true
   multiline.match: after
 {% endif %}
-
-{% if  LOG_TYPE == "raw" %}
+{% if COMPONENT == "PAYMENT" %}
   include_lines: ['^\[2']
 {% endif %}
 
