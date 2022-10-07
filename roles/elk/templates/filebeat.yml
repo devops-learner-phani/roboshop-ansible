@@ -1,6 +1,6 @@
 filebeat.inputs:
 - type: log
-  enabled: false
+  enabled: true
   paths:
     - /var/log/{{COMPONENT}}.log
 
@@ -20,5 +20,9 @@ processors:
   - add_cloud_metadata: ~
   - add_docker_metadata: ~
   - add_kubernetes_metadata: ~
+
+output.elasticsearch.index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+setup.template.name: "{{COMPONENT}}-%{+yyyy.MM.dd}"
+setup.template.pattern: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 
 
