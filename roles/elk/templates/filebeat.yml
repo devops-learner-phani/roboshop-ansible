@@ -12,6 +12,7 @@ setup.template.settings:
   index.number_of_shards: 1
 
 output.elasticsearch:
+  index: "{{COMPONENT}"
   hosts: ["elasticsearch.roboshop.internal:9200"]
 
 processors:
