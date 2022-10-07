@@ -2,8 +2,8 @@ COMPONENT: "payment"
 APP_LOCATION: /home/roboshop/{{COMPONENT}}
 SUFFIX: /
 RABBITMQ_USER_PASSWORD: "{{SECRETS.RABBITMQ_USER_PASSWORD}}"
-LOG_TYPE: raw
-LOG_FILE: /var/log/payment.log
+#LOG_TYPE: raw
+#LOG_FILE: /var/log/payment.log
 
 
 
