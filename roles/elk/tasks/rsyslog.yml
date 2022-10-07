@@ -1,0 +1,9 @@
+- name: Configure the rsyslog template
+  ansible.builtin.template:
+    src: rsyslog.conf
+    dest: /etc/rsyslog.d/roboshop.conf
+
+- name: Restart RSYSLOG
+  ansible.builtin.systemd:
+    name: rsyslog
+    state: restarted
