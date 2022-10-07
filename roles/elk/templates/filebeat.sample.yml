@@ -146,7 +146,6 @@ output.elasticsearch:
 
   # ------------------------------ Logstash Output -------------------------------
   #output.logstash:
-  # The Logstash hosts
   #hosts: ["localhost:5044"]
 
   # Optional SSL. By default is off.
