@@ -3,3 +3,4 @@
     name: elk
     tasks_from: rsyslog
   when: SETUP_TYPE == "rsyslog"
+
