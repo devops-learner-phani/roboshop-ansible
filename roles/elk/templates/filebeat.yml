@@ -9,6 +9,12 @@ filebeat.inputs:
   fields:
     env: {{ENV}}
     component: {{COMPONENT}}
+{% if {{COMPONENT } } == "shipping" %}
+  multiline.type: pattern
+  multiline.pattern: '^2'
+  multiline.negate: true
+  multiline.match: after
+{% endif %}
 
 {% if LOG_TYPE == "json" %}
 output.elasticsearch:
@@ -25,6 +31,8 @@ output.logstash:
   hosts: ["elasticsearch.roboshop.internal:5044"]
 {% endif %}
 
+
+                                            
 #----------------------------------------
 
 filebeat.config.modules:
